@@ -12,6 +12,7 @@
     <button id="mbutt">Le bouton magique</button>
     <button id="but2">La Loc</button>
     <textarea id="loc"></textarea>
+    <p id="dev"></p>
     <script>
 
         document.querySelector("#but2").addEventListener("click", () => {
@@ -23,14 +24,13 @@
         option = {
             filters: [
                 {name: 'OnePlus 5T'}
-        ],
-        optionalServices: ['battery_service']
+        ]
         };
     
         document.querySelector("#mbutt").addEventListener("click", () => {
             navigator.bluetooth.requestDevice(option)
             .then(device => {
-                console.log("ok");})
+                document.getElementById("dev").innerHTML = device.name})
             .catch(error => {
                 console.log("nope");
         });
