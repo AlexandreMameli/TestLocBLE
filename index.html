@@ -14,21 +14,11 @@
     <textarea id="loc"></textarea>
     <script>
 
-navigator.geolocation.getCurrentPosition(position => {
+        document.querySelector("#but2").addEventListener("click", () => {
+            navigator.geolocation.getCurrentPosition((position) => {
                     document.querySelector("#loc").value = position.coords.latitude + "  " + position.coords.longitude
-                },
-                function(error){
-                    alert(error.message);
-                },
-                {
-                    enableHighAccuracy: true
-                    ,timeout : 5000
                 }); 
-        // document.querySelector("#but2").addEventListener("click", () => {
-        //     navigator.geolocation.getCurrentPosition((position) => {
-        //             document.querySelector("#loc").value = position.coords.latitude + "  " + position.coords.longitude
-        //         }); 
-        // })
+        })
         
         option = {
             filters: [
