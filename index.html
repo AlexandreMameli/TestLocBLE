@@ -28,7 +28,7 @@
         };
     
         document.querySelector("#mbutt").addEventListener("click", () => {
-            navigator.bluetooth.requestDevice({acceptAllDevices : true})
+            navigator.bluetooth.requestDevice(option)
             .then(device => {
                 console.log("ok");})
             .catch(error => {
