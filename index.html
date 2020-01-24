@@ -40,7 +40,7 @@
                 return device.gatt.connect();
                 })
             .then(server => {
-                // Getting Service ou pas...
+                // Getting Service ou pas 1 2 test test...
                 document.getElementById("t1").innerHTML = "services : " + server.getPrimaryServices(0xAAAA).toString();
                 return server.getPrimaryServices(0xAAAA);
                 })
