@@ -54,8 +54,8 @@
                 // var chara = characteristic.readValue() + 1;
                 return characteristic.readValue();
                 })
-            .then(_ => {
-                document.getElementById("chara").innerHTML = 'la valeur a pe changé';
+            .then(value => {
+                document.getElementById("chara").innerHTML = 'la valeur a pe changé : ' + value;
                 })
             .catch(error => {
                 document.getElementById("nope").innerHTML = "nope";
