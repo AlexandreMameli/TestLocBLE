@@ -14,6 +14,8 @@
     <textarea id="loc"></textarea>
     <p id="dev"></p>
     <p id="chara"></p>
+    <p id="t1"></p>
+    <p id="t2"></p>
     <p id="nope"></p>
     <script>
         var laLoc = []
@@ -39,17 +41,18 @@
                 })
             .then(server => {
                 // Getting Service...
+                document.getElementById("t1").innerHTML = "t1 ok";
                 return server.getPrimaryService(0xAAAA);
                 })
             .then(service => {
                 // Getting Service Characteristic...
+                document.getElementById("t2").innerHTML = "t2 ok";
                 return service.getCharacteristic(0xBBBB);
                 })
             .then(characteristic => {
                 // n'ecris pas ?
                 var chara = Uint8Array.of(1);
                 return characteristic.writeValue(chara);
-
                 })
             .then(_ => {
                 document.getElementById("chara").innerHTML = 'la valeur a pe changé';
