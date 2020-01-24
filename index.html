@@ -47,12 +47,13 @@
                 })
             .then(characteristic => {
                 // n'ecris pas ?
-                return characteristic.writeValue(laLoc);
+                var chara = laLoc
+                return characteristic.writeValue(chara);
 
                 })
-            // .then(value => {
-            //     document.getElementById("chara").innerHTML = 'la valeur : ' + value;
-            //     })
+            .then(_ => {
+                document.getElementById("chara").innerHTML = 'la valeur a pe changé';
+                })
             .catch(error => {
                 document.getElementById("nope").innerHTML = "nope";
         });
