@@ -14,6 +14,7 @@
     <textarea id="loc"></textarea>
     <p id="dev"></p>
     <p id="chara"></p>
+    <p id="nope"></p>
     <script>
         var laLoc = []
         document.querySelector("#but2").addEventListener("click", () => {
@@ -53,7 +54,7 @@
                 document.getElementById("chara").innerHTML = 'la valeur : ' + value;
                 })
             .catch(error => {
-                console.log("nope");
+                document.getElementById("nope").innerHTML = "nope";
         });
         })
 
