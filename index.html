@@ -15,9 +15,10 @@
     <p id="dev"></p>
     <p id="chara"></p>
     <script>
-
+        var laLoc = []
         document.querySelector("#but2").addEventListener("click", () => {
             navigator.geolocation.getCurrentPosition((position) => {
+                    laLoc = [position.coords.latitude, position.coords.longitude]
                     document.querySelector("#loc").value = position.coords.latitude + "  " + position.coords.longitude
                 }); 
         })
@@ -45,7 +46,8 @@
                 })
             .then(characteristic => {
                 // Reading Characteristic
-                return characteristic.readValue();
+                return characteristic.writeValue(laLoc);
+
                 })
             .then(value => {
                 document.getElementById("chara").innerHTML = 'la valeur : ' + value.getUint8(0);
