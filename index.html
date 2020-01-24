@@ -40,13 +40,13 @@
                 return device.gatt.connect();
                 })
             .then(server => {
-                // Getting Service ou pas ...
+                // Getting Service ou pas...
                 document.getElementById("t1").innerHTML = "services : " + server.getPrimaryServices(0xAAAA).toString();
-                return server.getOptionalService(0xAAAA);
+                return server.getPrimaryServices(0xAAAA);
                 })
             .then(service => {
                 // Getting Service Characteristic...
-                document.getElementById("t2").innerHTML = "chara : " + service.getCharacteristic(0xBBBB);
+                document.getElementById("t2").innerHTML = "chara : " + service.getCharacteristics();
                 return service.getCharacteristic(0xBBBB);
                 })
             .then(characteristic => {
