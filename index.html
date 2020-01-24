@@ -13,6 +13,7 @@
     <button id="but2">La Loc</button>
     <textarea id="loc"></textarea>
     <p id="dev"></p>
+    <p id="chara"></p>
     <script>
 
         document.querySelector("#but2").addEventListener("click", () => {
@@ -23,7 +24,7 @@
         
         option = {
             filters: [
-                {services : ["onTestDesTrucs"]},
+                {services : [0xAAAA]},
                 {name: 'LeLopy'}
         ]
         };
@@ -34,6 +35,22 @@
                 document.getElementById("dev").innerHTML = "dev: " + device.name
                 return device.gatt.connect();
                 })
+            .then(server => {
+                // Getting Service...
+                return server.getPrimaryService(0xAAAA);
+                })
+            .then(service => {
+                // Getting Service Characteristic...
+                return service.getCharacteristic(0xBBBB);
+                })
+            .then(characteristic => {
+                // Reading Characteristic
+                return characteristic.readValue();
+                })
+            .then(value => {
+                document.getElementById("chara").innerHTML = 'la valeur : ' + value.getUint8(0);
+                })
+
             .catch(error => {
                 console.log("nope");
         });
