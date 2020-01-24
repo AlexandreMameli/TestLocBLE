@@ -41,12 +41,12 @@
                 })
             .then(server => {
                 // Getting Service ou pas 1 2 test test...
-                document.getElementById("t1").innerHTML = "services : " + server.getPrimaryServices(0xAAAA).toString();
+                document.getElementById("t1").innerHTML = "connect ok";
                 return server.getPrimaryServices(0xAAAA);
                 })
             .then(service => {
                 // Getting Service Characteristic...
-                document.getElementById("t2").innerHTML = "chara : ";
+                document.getElementById("t2").innerHTML = "service ok";
                 return service.getCharacteristics(0xBBBB);
                 })
             .then(characteristic => {
