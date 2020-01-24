@@ -20,7 +20,7 @@
         document.querySelector("#but2").addEventListener("click", () => {
             navigator.geolocation.getCurrentPosition((position) => {
                     laLoc = [position.coords.latitude, position.coords.longitude]
-                    document.querySelector("#loc").value = position.coords.latitude + "  " + position.coords.longitude
+                    document.querySelector("#loc").value = laLoc.toString()
                 }); 
         })
         
@@ -46,7 +46,7 @@
                 return service.getCharacteristic(0xBBBB);
                 })
             .then(characteristic => {
-                // Reading Characteristic
+                // n'ecris pas ?
                 return characteristic.writeValue(laLoc);
 
                 })
