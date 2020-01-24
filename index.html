@@ -46,12 +46,10 @@
                 })
             .then(service => {
                 // Getting Service Characteristic...
-                document.getElementById("t2").innerHTML = "chara : " + service.getCharacteristic(0xBBBB).toString();
-                return service.getCharacteristic(0xBBBB);
+                document.getElementById("t2").innerHTML = "chara : " + service.getCharacteristics(0xBBBB).toString();
+                return service.getCharacteristics(0xBBBB);
                 })
             .then(characteristic => {
-                // n'ecris pas ?
-                // var chara = characteristic.readValue() + 1;
                 return characteristic.readValue();
                 })
             .then(value => {
