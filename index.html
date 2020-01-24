@@ -50,9 +50,8 @@
 
                 })
             .then(value => {
-                document.getElementById("chara").innerHTML = 'la valeur : ' + value.getUint8(0);
+                document.getElementById("chara").innerHTML = 'la valeur : ' + value;
                 })
-
             .catch(error => {
                 console.log("nope");
         });
