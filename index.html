@@ -50,9 +50,9 @@
                 return characteristic.writeValue(laLoc);
 
                 })
-            .then(value => {
-                document.getElementById("chara").innerHTML = 'la valeur : ' + value;
-                })
+            // .then(value => {
+            //     document.getElementById("chara").innerHTML = 'la valeur : ' + value;
+            //     })
             .catch(error => {
                 document.getElementById("nope").innerHTML = "nope";
         });
