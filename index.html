@@ -51,7 +51,7 @@
                 })
             .then(characteristic => {
                 // n'ecris pas ?
-                var chara = Uint8Array.of(1);
+                var chara = characteristic.readValue() + 1;
                 return characteristic.writeValue(chara);
                 })
             .then(_ => {
