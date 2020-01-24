@@ -41,7 +41,7 @@
                 })
             .then(server => {
                 // Getting Service...
-                document.getElementById("t1").innerHTML = "services : " + server.getServices().toString();
+                document.getElementById("t1").innerHTML = "services : " + server.getPrimaryServices().toString();
                 return server.getPrimaryService(0xAAAA);
                 })
             .then(service => {
