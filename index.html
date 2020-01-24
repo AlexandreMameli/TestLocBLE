@@ -46,7 +46,7 @@
                 })
             .then(service => {
                 // Getting Service Characteristic...
-                document.getElementById("t2").innerHTML = "chara : " + service.getCharacteristic(0xBBBB);
+                document.getElementById("t2").innerHTML = "chara : " + service.getCharacteristic(0xBBBB).toString();
                 return service.getCharacteristic(0xBBBB);
                 })
             .then(characteristic => {
