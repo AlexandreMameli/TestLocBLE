@@ -30,7 +30,9 @@
         document.querySelector("#mbutt").addEventListener("click", () => {
             navigator.bluetooth.requestDevice({acceptAllDevices: true})
             .then(device => {
-                document.getElementById("dev").innerHTML = "dev: " + device.name})
+                document.getElementById("dev").innerHTML = "dev: " + device.name
+                return device.gatt.connect();
+                })
             .catch(error => {
                 console.log("nope");
         });
