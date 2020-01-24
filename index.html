@@ -23,12 +23,13 @@
         
         option = {
             filters: [
-                {name: 'OnePlus 5T'}
+                {services : ["onTestDesTrucs"]},
+                {name: 'LeLopy'}
         ]
         };
     
         document.querySelector("#mbutt").addEventListener("click", () => {
-            navigator.bluetooth.requestDevice({acceptAllDevices: true})
+            navigator.bluetooth.requestDevice(option)
             .then(device => {
                 document.getElementById("dev").innerHTML = "dev: " + device.name
                 return device.gatt.connect();
