@@ -16,6 +16,7 @@
     <p id="chara"></p>
     <p id="t1"></p>
     <p id="t2"></p>
+    <p id="t3"></p>
     <p id="nope"></p>
     <script>
         var laLoc = []
@@ -47,9 +48,10 @@
             .then(service => {
                 // Getting Service Characteristic...
                 document.getElementById("t2").innerHTML = "service ok";
-                return service.getCharacteristic();
+                return service.getCharacteristic(0xBBBB);
                 })
             .then(characteristic => {
+                document.getElementById("t3").innerHTML = "chara ok";
                 return characteristic.readValue();
                 })
             .then(value => {
