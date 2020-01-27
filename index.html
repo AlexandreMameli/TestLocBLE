@@ -27,15 +27,10 @@
                 });
         })
 
-        option = {
-            filters: [
-                {services : [0xAAAA]}
-        ]
-        };
 
         document.querySelector("#mbutt").addEventListener("click", () => {
             // navigator.bluetooth.requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]})
-            navigator.bluetooth.requestDevice(option)
+            navigator.bluetooth.requestDevice({filters: [{services : [0xAAAA]}]})
             .then(device => {
                 document.getElementById("dev").innerHTML = "dev: " + device.name
                 return device.gatt.connect();
@@ -48,7 +43,7 @@
             .then(service => {
                 // Getting Service Characteristic...
                 document.getElementById("t2").innerHTML = "service ok";
-                return service.Characteristic(0xBBBB);
+                return service.getCharacteristic(0xBBBB);
                 })
             .then(characteristic => {
                 document.getElementById("t3").innerHTML = "chara ok";
