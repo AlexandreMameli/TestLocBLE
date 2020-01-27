@@ -24,18 +24,18 @@
             navigator.geolocation.getCurrentPosition((position) => {
                     laLoc = [position.coords.latitude, position.coords.longitude]
                     document.querySelector("#loc").value = laLoc.toString()
-                }); 
+                });
         })
-        
+
         option = {
             filters: [
-                {services : [0xAAAA]},
-                {name: 'leLopy'}
+                {services : [0xAAAA]}
         ]
         };
-    
+
         document.querySelector("#mbutt").addEventListener("click", () => {
-            navigator.bluetooth.requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]})
+            // navigator.bluetooth.requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]})
+            navigator.bluetooth.requestDevice(option)
             .then(device => {
                 document.getElementById("dev").innerHTML = "dev: " + device.name
                 return device.gatt.connect();
@@ -62,7 +62,7 @@
         });
         })
 
-        
+
         </script>
 </body>
 </html>
