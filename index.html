@@ -84,7 +84,8 @@
                     console.log([position.coords.latitude, position.coords.longitude])
                     return [position.coords.latitude, position.coords.longitude];
                 });
-                document.getElementById("t1").innerText = "test :" + loc[0] + "," + loc[1] + ":" + valeur;
+                // document.getElementById("t1").innerText = "test :" + loc[0] + "," + loc[1] + ":" + valeur;
+                document.getElementById("t1").innerText = "test : " + valeur;
             });
 
         receiveCharacteristic.startNotifications();
