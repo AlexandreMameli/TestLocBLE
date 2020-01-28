@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="download.js"></script>
 </head>
 <body>
     <h1>test</h1>
@@ -19,14 +20,6 @@
     <p id="t3"></p>
     <p id="nope"></p>
     <script>
-        var laLoc = []
-        document.querySelector("#but2").addEventListener("click", () => {
-            navigator.geolocation.getCurrentPosition((position) => {
-                    laLoc = [position.coords.latitude, position.coords.longitude]
-                    document.querySelector("#loc").value = laLoc.toString()
-                });
-        })
-
 
         // document.querySelector("#mbutt").addEventListener("click", () => {
         //     navigator.bluetooth.requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]})
@@ -70,7 +63,7 @@
             receiveCharacteristic = await service.getCharacteristic(0xBBBB);
             // value = await receiveCharacteristic.readValue();
             // document.getElementById("chara").innerHTML = 'la valeur ? : ' + value.getUint8(0);
-            listen();
+            // listen();
         };
         let valeur;
         const listen = () => {
@@ -80,17 +73,23 @@
                 // valeur = await receiveCharacteristic.readValue();
                 valeur = evt.target.value.getInt8(0);
                 console.log(valeur);
-                loc = await navigator.geolocation.getCurrentPosition((position) => {
-                    console.log([position.coords.latitude, position.coords.longitude])
-                    return [position.coords.latitude, position.coords.longitude];
-                });
                 // document.getElementById("t1").innerText = "test :" + loc[0] + "," + loc[1] + ":" + valeur;
-                document.getElementById("t1").innerText = "test : " + valeur;
+                // document.getElementById("t1").innerText = "test : " + valeur;
             });
 
         receiveCharacteristic.startNotifications();
-};
+        };
 
+        document.querySelector("#but2").addEventListener("click", async () => {
+            valeur = await receiveCharacteristic.readValue();
+            navigator.geolocation.getCurrentPosition((position) => {
+                loc = [position.coords.latitude, position.coords.longitude]
+                document.getElementById("t2").innerText += "loc : " + loc[0] + "," + loc[1] + "; rssi : " + valeur.getInt8(0) + "\r\n";
+                    
+            });
+            
+            
+        })
 
 
         </script>
