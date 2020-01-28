@@ -28,34 +28,50 @@
         })
 
 
-        document.querySelector("#mbutt").addEventListener("click", () => {
-            navigator.bluetooth.requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]})
-            // navigator.bluetooth.requestDevice({filters: [{services : [0xAAAA]}]})
-            .then(device => {
-                document.getElementById("dev").innerHTML = "dev: " + device.name
-                return device.gatt.connect();
-                })
-            .then(server => {
-                // Getting Service ou pas 1 2 test test...
-                document.getElementById("t1").innerHTML = "connect ok";
-                return server.getPrimaryServices(0xAAAA);
-                })
-            .then(service => {
-                // Getting Service Characteristic...
-                document.getElementById("t2").innerHTML = "service ok";
-                return service.getCharacteristic(0xBBBB);
-                })
-            .then(characteristic => {
-                document.getElementById("t3").innerHTML = "chara ok";
-                return characteristic.readValue();
-                })
-            .then(value => {
-                document.getElementById("chara").innerHTML = 'la valeur a pe changé : ' + value;
-                })
-            .catch(error => {
-                document.getElementById("nope").innerHTML = "nope " + error;
-        });
-        })
+        // document.querySelector("#mbutt").addEventListener("click", () => {
+        //     navigator.bluetooth.requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]})
+        //     // navigator.bluetooth.requestDevice({filters: [{services : [0xAAAA]}]})
+        //     .then(device => {
+        //         document.getElementById("dev").innerHTML = "dev: " + device.name
+        //         return device.gatt.connect();
+        //         })
+        //     .then(server => {
+        //         // Getting Service ou pas 1 2 test test...
+        //         document.getElementById("t1").innerHTML = "connect ok";
+        //         return server.getPrimaryServices(0xAAAA);
+        //         })
+        //     .then(service => {
+        //         // Getting Service Characteristic...
+        //         document.getElementById("t2").innerHTML = "service ok";
+        //         return service.getCharacteristic(0xBBBB);
+        //         })
+        //     .then(characteristic => {
+        //         document.getElementById("t3").innerHTML = "chara ok";
+        //         return characteristic.readValue();
+        //         })
+        //     .then(value => {
+        //         document.getElementById("chara").innerHTML = 'la valeur a pe changé : ' + value;
+        //         })
+        //     .catch(error => {
+        //         document.getElementById("nope").innerHTML = "nope " + error;
+        // });
+        
+        
+        // });
+
+        let device, sendCharacteristic, receiveCharacteristic;
+        document.getElementById("mbutt").onclick = async () => {
+        device = await navigator.bluetooth
+                    .requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]});
+
+        const server = await device.gatt.connect();
+        const service = await server.getPrimaryService(0xAAAA);
+
+        const receiveCharacteristic = await service.getCharacteristic(0xBBBB);
+        const value = await receiveCharacteristic.readValue();
+        document.getElementById("chara").innerHTML = 'la valeur ? : ' + value.getInt8(0);
+        };
+
 
 
         </script>
