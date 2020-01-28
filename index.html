@@ -59,18 +59,36 @@
         
         // });
 
-        let device, sendCharacteristic, receiveCharacteristic;
+        let device, sendCharacteristic, receiveCharacteristic, loc;
         document.getElementById("mbutt").onclick = async () => {
-        device = await navigator.bluetooth
-                    .requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]});
+            device = await navigator.bluetooth
+                        .requestDevice({acceptAllDevices:true, optionalServices: [0xAAAA]});
 
-        const server = await device.gatt.connect();
-        const service = await server.getPrimaryService(0xAAAA);
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService(0xAAAA);
 
-        const receiveCharacteristic = await service.getCharacteristic(0xBBBB);
-        const value = await receiveCharacteristic.readValue();
-        document.getElementById("chara").innerHTML = 'la valeur ? : ' + value.getInt8(0);
+            receiveCharacteristic = await service.getCharacteristic(0xBBBB);
+            // value = await receiveCharacteristic.readValue();
+            // document.getElementById("chara").innerHTML = 'la valeur ? : ' + value.getUint8(0);
+            listen();
         };
+        let valeur;
+        const listen = () => {
+        receiveCharacteristic
+            .addEventListener('characteristicvaluechanged', 
+            async (evt) => {
+                // valeur = await receiveCharacteristic.readValue();
+                valeur = evt.target.value.getInt8(0);
+                console.log(valeur);
+                loc = await navigator.geolocation.getCurrentPosition((position) => {
+                    console.log([position.coords.latitude, position.coords.longitude])
+                    return [position.coords.latitude, position.coords.longitude];
+                });
+                document.getElementById("t1").innerText = "test :" + loc[0] + "," + loc[1] + ":" + valeur;
+            });
+
+        receiveCharacteristic.startNotifications();
+};
 
 
 
