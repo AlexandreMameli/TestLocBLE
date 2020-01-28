@@ -81,15 +81,25 @@
         };
 
         document.querySelector("#but2").addEventListener("click", async () => {
-            valeur = await receiveCharacteristic.readValue();
+            // valeur = await receiveCharacteristic.readValue();
             navigator.geolocation.getCurrentPosition((position) => {
                 loc = [position.coords.latitude, position.coords.longitude]
-                document.getElementById("t2").innerText += "loc : " + loc[0] + "," + loc[1] + "; rssi : " + valeur.getInt8(0) + "\r\n";
+                receiveCharacteristic.writeValue(str2ab(loc.toString()));
+                // document.getElementById("t2").innerText += "loc : " + loc[0] + "," + loc[1] + "; rssi : " + valeur.getInt8(0) + "\r\n";
                     
             });
             
             
-        })
+        });
+        function str2ab(str) {
+            var buf = new ArrayBuffer(str.length); // 2 bytes for each char
+            var bufView = new Uint8Array(buf);
+            for (var i=0, strLen=str.length; i < strLen; i++) {
+                bufView[i] = str.charCodeAt(i);
+        }
+  return buf;
+}
+
 
 
         </script>
