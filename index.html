@@ -74,15 +74,13 @@
 
         document.querySelector("#but2").addEventListener("click", async () => {
             // valeur = await receiveCharacteristic.readValue();
-            while(true){
-                navigator.geolocation.getCurrentPosition((position) => {
-                    document.getElementById("pLoc").innerText = position.coords.latitude + "," + position.coords.longitude;
-                    loc = [position.coords.latitude, position.coords.longitude]
-                    receiveCharacteristic.writeValue(str2ab(loc.toString()));
-                    // document.getElementById("t2").innerText += "loc : " + loc[0] + "," + loc[1] + "; rssi : " + valeur.getInt8(0) + "\r\n";
-                        
-                });
-            }
+            navigator.geolocation.getCurrentPosition((position) => {
+                document.getElementById("pLoc").innerText = position.coords.latitude + "," + position.coords.longitude;
+                loc = [position.coords.latitude, position.coords.longitude]
+                receiveCharacteristic.writeValue(str2ab(loc.toString()));
+                // document.getElementById("t2").innerText += "loc : " + loc[0] + "," + loc[1] + "; rssi : " + valeur.getInt8(0) + "\r\n";
+                    
+            });
         });
 
         function str2ab(str) {
